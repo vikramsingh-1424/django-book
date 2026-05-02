@@ -1,13 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
-    path('',include('users.urls')),
-    path('movies/', include('movies.urls')),
+from django.urls import path
+from . import views
+urlpatterns=[
+    path('',views.movie_list,name='movie_list'),
+    path('<int:movie_id>/theaters',views.theater_list,name='theater_list'),
+    path('theater/<int:theater_id>/seats/book/',views.book_seats,name='book_seats'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
